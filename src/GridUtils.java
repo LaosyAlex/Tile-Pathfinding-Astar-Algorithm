@@ -57,7 +57,11 @@ public class GridUtils {
             System.out.print(i);
             System.out.print(" ".repeat(slotSize - String.valueOf(Math.abs(i)).length()));
             for (int j = 0; j < grid[0].length; j++){
-                System.out.print(grid[i][j]);
+                if (grid[i][j] == 'X' || grid[i][j] == 'G'){
+                    System.out.print("\\u001B[33m" + grid[i][j] + "\u001B[30m");
+                } else {
+                    System.out.print(grid[i][j]);
+                }
                 System.out.print(" ".repeat(slotSize - 1)); //Math.abs() turns the $,% etc into ASCII code (usually 2 digits despite 1 symbol) 
             }
             System.out.print("\n");
