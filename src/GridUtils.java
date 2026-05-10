@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class GridUtils {
     public static char[][] generateGrid(int n, int m){
@@ -24,5 +25,19 @@ public class GridUtils {
         }
         return grid;
     }
-    
+    public static int[] sizeSpecificier(){
+        int[] dim = new int[2];
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("# Rows: ");
+        dim[0] = scanner.nextInt();
+
+
+        System.out.print("# Columns: ");
+        dim[1] = scanner.nextInt();
+
+        scanner.close();
+
+        return dim; 
+    }
 }
