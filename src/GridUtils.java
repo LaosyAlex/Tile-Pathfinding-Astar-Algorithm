@@ -25,9 +25,8 @@ public class GridUtils {
         }
         return grid;
     }
-    public static int[] sizeSpecificier(){
+    public static int[] sizeSpecificier(Scanner scanner){
         int[] dim = new int[2];
-        Scanner scanner = new Scanner(System.in);
 
         System.out.print("# Rows: ");
         dim[0] = scanner.nextInt();
@@ -35,8 +34,6 @@ public class GridUtils {
 
         System.out.print("# Columns: ");
         dim[1] = scanner.nextInt();
-
-        scanner.close();
 
         return dim; 
     }
@@ -67,13 +64,11 @@ public class GridUtils {
             System.out.print("\n");
         }
     }
-    public static void setStartEnd(char[][] grid){
+    public static void setStartEnd(char[][] grid, Scanner scanner){
         int sx;
         int sy;
         int ex;
         int ey;
-
-        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Starting x coordinate: ");
         sx = scanner.nextInt();
@@ -86,7 +81,5 @@ public class GridUtils {
         System.out.print("Ending y coordinate: ");
         ey = scanner.nextInt();
         grid[ey][ex] = 'G';
-
-        scanner.close();
     }
 }
