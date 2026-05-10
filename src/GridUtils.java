@@ -55,7 +55,7 @@ public class GridUtils {
             System.out.print(" ".repeat(slotSize - String.valueOf(Math.abs(i)).length()));
             for (int j = 0; j < grid[0].length; j++){
                 if (grid[i][j] == 'X' || grid[i][j] == 'G'){
-                    System.out.print("\\u001B[33m" + grid[i][j] + "\u001B[30m");
+                    System.out.print("\u001B[32m" + grid[i][j] + "\u001B[0m");
                 } else {
                     System.out.print(grid[i][j]);
                 }
