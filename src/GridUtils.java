@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class GridUtils {
     public static char[][] generateGrid(int n, int m){
@@ -28,7 +29,19 @@ public class GridUtils {
 
         return dim; 
     }
+    public static Boolean isIntArrinArrList(ArrayList<int[]> list, int[] arr){
+        for (int i = 0; i < list.size(); i++){
+            int[] arri = list.get(i);
+            if (arri[0] == arr[0] && arri[1] == arr[1]){
+                return true;
+            }
+        }
+        return false;
+    }
     public static void printGrid(char[][] grid){
+        printGrid(grid, null);
+    }
+    public static void printGrid(char[][] grid, ArrayList<int[]> path){
         int slotSize = String.valueOf(Math.abs(grid[0].length - 1)).length() + 1;
 
         System.out.print("+");
@@ -47,6 +60,8 @@ public class GridUtils {
             for (int j = 0; j < grid[0].length; j++){
                 if (grid[i][j] == 'X' || grid[i][j] == 'G'){
                     System.out.print("\u001B[32m" + grid[i][j] + "\u001B[0m");
+                } else if (path != null && isIntArrinArrList(path, new int[]{j, i})){
+                    System.out.print("\u001B[31m" + grid[i][j] + "\u001B[0m");
                 } else {
                     System.out.print(grid[i][j]);
                 }

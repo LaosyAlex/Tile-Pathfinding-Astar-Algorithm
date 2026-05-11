@@ -12,9 +12,10 @@ public class Main {
         int[][] startEnd = GridUtils.setStartEnd(grid, scanner);
         int[] currentTile = startEnd[0];
         int[] goal = startEnd[1];
+        GridUtils.printGrid(grid);
+
         ArrayList<int[]> path = new ArrayList<>();
         path.add(currentTile);
-        GridUtils.printGrid(grid);
 
     }
 }
