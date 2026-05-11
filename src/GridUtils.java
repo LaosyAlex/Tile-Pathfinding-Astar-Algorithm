@@ -76,5 +76,7 @@ public class GridUtils {
         int[] start = {sx,sy};
         int[] end = {ex, ey};
         int[][] startEnd = {start,end};
+
+        return startEnd;
     }
 }
