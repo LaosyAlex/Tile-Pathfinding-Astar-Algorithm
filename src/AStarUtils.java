@@ -43,5 +43,12 @@ public class AStarUtils {
                 return 0;
         }
     }
+    public static double evaluateTile(int[] goal, char[][] grid, int[] p){
+            int mD = manhattanDistance(goal, p);
+            char symbol = grid[p[1]][p[0]];
+            double value = evaluateSymbol(symbol);
+            double total = value + mD;
+            return total;
+    }
 
 }
