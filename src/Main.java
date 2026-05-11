@@ -17,5 +17,11 @@ public class Main {
         ArrayList<int[]> path = new ArrayList<>();
         path.add(currentTile);
 
+        while(currentTile[0] != goal[0] || currentTile[1] != goal[1]){
+            currentTile = AStarUtils.evaluateNeighbours(goal, grid, currentTile);
+            path.add(currentTile);
+            GridUtils.printGrid(grid, path);
+        }
+        
     }
 }
