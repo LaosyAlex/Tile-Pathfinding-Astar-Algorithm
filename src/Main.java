@@ -7,7 +7,7 @@ public class Main {
         int[] dim = GridUtils.sizeSpecificier(scanner);
         char[][] grid = GridUtils.generateGrid(dim[0], dim[1]);
         GridUtils.printGrid(grid);
-        GridUtils.setStartEnd(grid, scanner);
+        int[][] startEnd = GridUtils.setStartEnd(grid, scanner);
         GridUtils.printGrid(grid);
     }
 }

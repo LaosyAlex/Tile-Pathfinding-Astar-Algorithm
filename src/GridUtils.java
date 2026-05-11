@@ -55,7 +55,7 @@ public class GridUtils {
             System.out.print("\n");
         }
     }
-    public static void setStartEnd(char[][] grid, Scanner scanner){
+    public static int[][] setStartEnd(char[][] grid, Scanner scanner){
         int sx;
         int sy;
         int ex;
@@ -72,5 +72,9 @@ public class GridUtils {
         System.out.print("Ending y coordinate: ");
         ey = scanner.nextInt();
         grid[ey][ex] = 'G';
+
+        int[] start = {sx,sy};
+        int[] end = {ex, ey};
+        int[][] startEnd = {start,end};
     }
 }
