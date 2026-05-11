@@ -3,15 +3,6 @@ import java.util.Scanner;
 
 public class GridUtils {
     public static char[][] generateGrid(int n, int m){
-        /*
-        @ - 0.5
-        # - 1
-        % - 1.5
-        & - 2
-        $ - 2.5
-        X - Start
-        G - Goal
-        */
         char[] tiles = {'@', '#', '%', '&', '$'};
         char[][] grid = new char[n][m];
 
