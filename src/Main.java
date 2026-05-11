@@ -22,6 +22,5 @@ public class Main {
             path.add(currentTile);
             GridUtils.printGrid(grid, path);
         }
-        
     }
 }
