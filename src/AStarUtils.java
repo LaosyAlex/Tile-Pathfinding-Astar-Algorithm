@@ -4,7 +4,7 @@ public class AStarUtils {
     # - 1
     % - 1.5
     & - 2
-    $ - 2.5
+    $ - 5
     X - Start
     G - Goal
     */
@@ -18,5 +18,13 @@ public class AStarUtils {
     */
     public static int manhattanDistance(int[] p1, int[] p2){
         return Math.abs(p1[0]-p2[0]) + Math.abs(p1[1]-p2[1]);
+    }
+    public static int[][] getNeighbours(int[] p){
+        int[] up = {p[0],p[1]+1};
+        int[] down = {p[0],p[1]-1};
+        int[] left = {p[0]+1,p[1]};
+        int[] right = {p[0]-1,p[1]};
+        int[][] neighbours = {up,down,left,right};
+        return neighbours;
     }
 }
