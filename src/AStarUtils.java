@@ -1,21 +1,4 @@
 public class AStarUtils {
-    /*
-    @ - 0.5
-    # - 1
-    % - 1.5
-    & - 2
-    $ - 5
-    X - Start
-    G - Goal
-    */
-
-    /*
-    f(n) = g(n) + h(n)
-
-    g(n) = cost from start to current node
-    h(n) = guessed cost from current node to goal (distance or heuristic)
-    f(n) = total estimated cost
-    */
     public static int manhattanDistance(int[] p1, int[] p2){
         return Math.abs(p1[0]-p2[0]) + Math.abs(p1[1]-p2[1]);
     }
@@ -30,11 +13,11 @@ public class AStarUtils {
     public static double evaluateSymbol(char symbol){
         switch (symbol) {
             case '@':
-                return 0.5;
+                return 0.25;
             case '#':
-                return 1;
+                return 0.5;
             case '%':
-                return 1.5;
+                return 1;
             case '&':
                 return 2;
             case '$':
@@ -50,5 +33,16 @@ public class AStarUtils {
             double total = value + mD;
             return total;
     }
+    public static int[] evaluateNeighbours(int[] goal, char[][] grid, int[] p){
+        int[][] neighbours = getNeighbours(p);
+        int[] best = neighbours[0];
+        
+        for (int i = 1; i < neighbours.length; i++){
+            if (evaluateTile(goal, grid, best) < evaluateTile(goal, grid, neighbours[i])){
+                best = neighbours[0];
+            }
+        }
 
+        return best;
+    }
 }
