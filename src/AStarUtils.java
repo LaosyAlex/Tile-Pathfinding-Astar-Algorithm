@@ -27,4 +27,21 @@ public class AStarUtils {
         int[][] neighbours = {up,down,left,right};
         return neighbours;
     }
+    public static double evaluateSymbol(char symbol){
+        switch (symbol) {
+            case '@':
+                return 0.5;
+            case '#':
+                return 1;
+            case '%':
+                return 1.5;
+            case '&':
+                return 2;
+            case '$':
+                return 5;
+            default:
+                return 0;
+        }
+    }
+
 }
