@@ -54,20 +54,68 @@ public class AStarUtils {
                 return 0;
         }
     }
-    public static double evaluateTile(int[] goal, char[][] grid, int[] p){
+    public static double evaluateBranch(int[] goal, char[][] grid, Branch path){
+            int[] p = path.front;
             int mD = manhattanDistance(goal, p);
             char symbol = grid[p[1]][p[0]];
             double value = evaluateSymbol(symbol);
-            double total = value + mD;
+            double total = value + mD + path.cost;
             return total;
     }
-    public static int[] evaluateNeighbours(int[] goal, char[][] grid, int[] p){
+    public static EvaluationResults evaluateNeighbours(int[] goal, char[][] grid, Branch path, ArrayList<int[]> closedSet){
+        /*
+        Needs to return:
+            paths
+            fronties
+            path totals
+        */
+        int[] p = path.front;
+        closedSet.add(p);
+        path.path.add(p);
+
         ArrayList<int[]> neighbours = getNeighbours(grid, p);
-        int[] best = neighbours.get(0);
-        
-        for (int i = 1; i < neighbours.size(); i++){
-            if (evaluateTile(goal, grid, best) > evaluateTile(goal, grid, neighbours.get(i))){
-                best = neighbours.get(i);
+
+        ArrayList<Branch> tempBranches = new ArrayList<>();
+        for (int i = 0; i < neighbours.size(); i++){
+            Branch tempBranch = new Branch(neighbours.get(i), path.path, path.cost + evaluateSymbol(grid[neighbours.get(i)[1]][neighbours.get(i)[0]]));
+
+            tempBranches.add(tempBranch);
+        }
+
+        Branch best = null;
+
+        for (int i = tempBranches.size() - 1; i >= 0; i--){ //backwards looping because we are removing elements and we do not want to go over
+            if (GridUtils.isIntArrinArrList(closedSet, tempBranches.get(i).front)){
+                tempBranches.remove(i);
+                continue;
+            } else if (best == null){
+                best = tempBranches.get(i);
+            } else if (evaluateBranch(goal, grid, best) > evaluateBranch(goal, grid, tempBranches.get(i))){
+                best = tempBranches.get(i);
+            }
+        }
+
+        if (best == null) {
+            return new EvaluationResults(null, new ArrayList<>());
+        }
+
+        tempBranches.remove(best);
+
+        EvaluationResults results = new EvaluationResults(best, tempBranches);
+
+        return results;
+    }
+    public static Branch recheckBranches(ArrayList<Branch> openSet, Branch currentBranch, int[] goal, char[][] grid){
+        Branch best = currentBranch;
+
+        if (openSet != null){
+            for (int i = 0; i < openSet.size(); i++){
+                if (evaluateBranch(goal, grid, best) > evaluateBranch(goal, grid, openSet.get(i))){
+                    Branch temp = openSet.get(i);
+                    openSet.remove(i);
+                    openSet.add(best);
+                    best = temp;
+                }
             }
         }
 
