@@ -62,7 +62,7 @@ public class AStarUtils {
             double total = value + mD + path.cost;
             return total;
     }
-    public static EvaluationResults evaluateNeighbours(int[] goal, char[][] grid, Branch path, ArrayList<int[]> closedSet){
+    public static Branch evaluateNeighboursOpenSet(int[] goal, char[][] grid, Branch path, ArrayList<int[]> closedSet, ArrayList<Branch> openSet){
         /*
         Needs to return:
             paths
@@ -82,28 +82,10 @@ public class AStarUtils {
             tempBranches.add(tempBranch);
         }
 
-        Branch best = null;
+        openSet.addAll(tempBranches);
+        Branch best = nextBestBranch(goal, grid, openSet);
 
-        for (int i = tempBranches.size() - 1; i >= 0; i--){ //backwards looping because we are removing elements and we do not want to go over
-            if (GridUtils.isIntArrinArrList(closedSet, tempBranches.get(i).front)){
-                tempBranches.remove(i);
-                continue;
-            } else if (best == null){
-                best = tempBranches.get(i);
-            } else if (evaluateBranch(goal, grid, best) > evaluateBranch(goal, grid, tempBranches.get(i))){
-                best = tempBranches.get(i);
-            }
-        }
-
-        if (best == null) {
-            return new EvaluationResults(null, new ArrayList<>());
-        }
-
-        tempBranches.remove(best);
-
-        EvaluationResults results = new EvaluationResults(best, tempBranches);
-
-        return results;
+        return best;
     }
     public static Branch recheckBranches(ArrayList<Branch> openSet, Branch currentBranch, int[] goal, char[][] grid){
         Branch best = currentBranch;

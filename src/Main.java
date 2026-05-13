@@ -21,19 +21,9 @@ public class Main {
         while(currentBranch.front[0] != goal[0] || currentBranch.front[1] != goal[1]){
             currentBranch = AStarUtils.recheckBranches(openSet, currentBranch, goal, grid);
 
-            EvaluationResults results = AStarUtils.evaluateNeighbours(goal, grid, currentBranch, closedSet);
+            Branch bestPath = AStarUtils.evaluateNeighboursOpenSet(goal, grid, currentBranch, closedSet, openSet);
 
-            if (results.bestPath == null){
-                GridUtils.printGrid(grid, currentBranch.path);
-                System.out.println("Dead Branch");
-                closedSet.add(currentBranch.front);
-                //adds branch to closed set, the branch is dead so do not add it to the open set
-                currentBranch = AStarUtils.nextBestBranch(openSet);
-                continue;
-            }
-
-            currentBranch = results.bestPath;
-            openSet.addAll(results.otherPaths);
+            currentBranch = bestPath;
         }
 
         GridUtils.printGrid(grid, currentBranch.path);
