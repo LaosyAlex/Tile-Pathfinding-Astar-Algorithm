@@ -29,7 +29,7 @@ public class Main {
                 closedSet.add(currentBranch.front);
                 //adds branch to closed set, the branch is dead so do not add it to the open set
                 currentBranch = AStarUtils.nextBestBranch(openSet);
-                return;
+                continue;
             }
 
             currentBranch = results.bestPath;
