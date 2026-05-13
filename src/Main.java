@@ -24,6 +24,6 @@ public class Main {
             currentBranch = bestPath;
         }
 
-        GridUtils.printGrid(grid, currentBranch.path);
+        GridUtils.printGrid(grid, currentBranch.path, closedSet);
     }
 }

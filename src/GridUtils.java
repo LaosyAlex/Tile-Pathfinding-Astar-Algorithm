@@ -39,9 +39,12 @@ public class GridUtils {
         return false;
     }
     public static void printGrid(char[][] grid){
-        printGrid(grid, null);
+        printGrid(grid, null, null);
     }
     public static void printGrid(char[][] grid, ArrayList<int[]> path){
+        printGrid(grid, path, null);
+    }
+    public static void printGrid(char[][] grid, ArrayList<int[]> path, ArrayList<int[]> closedSet){
         int slotSize = String.valueOf(Math.abs(grid[0].length - 1)).length() + 1;
 
         System.out.print("+");
@@ -62,6 +65,8 @@ public class GridUtils {
                     System.out.print("\u001B[32m" + grid[i][j] + "\u001B[0m");
                 } else if (path != null && isIntArrinArrList(path, new int[]{j, i})){
                     System.out.print("\u001B[31m" + grid[i][j] + "\u001B[0m");
+                } else if (path != null && isIntArrinArrList(closedSet, new int[]{j, i})){
+                    System.out.print("\u001B[33m" + grid[i][j] + "\u001B[0m");
                 } else {
                     System.out.print(grid[i][j]);
                 }
