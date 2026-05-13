@@ -121,4 +121,20 @@ public class AStarUtils {
 
         return best;
     }
+    public static Branch nextBestBranch(ArrayList<Branch> openSet){
+        Branch best = null;
+        for (int i = 0; i < openSet.size(); i++){
+            if (best == null){
+                Branch temp = openSet.get(i);
+                openSet.remove(i);
+                best = temp;
+            }else if (best.cost > openSet.get(i).cost){
+                Branch temp = openSet.get(i);
+                openSet.remove(i);
+                openSet.add(best);
+                best = temp;
+            }
+        }
+        return best;
+    }
 }

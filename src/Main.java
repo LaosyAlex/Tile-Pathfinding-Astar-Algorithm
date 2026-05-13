@@ -25,7 +25,10 @@ public class Main {
 
             if (results.bestPath == null){
                 GridUtils.printGrid(grid, currentBranch.path);
-                System.out.println("Null pathed");
+                System.out.println("Dead Branch");
+                closedSet.add(currentBranch.front);
+                //adds branch to closed set, the branch is dead so do not add it to the open set
+                currentBranch = AStarUtils.nextBestBranch(openSet);
                 return;
             }
 
