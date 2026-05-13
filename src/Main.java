@@ -19,8 +19,6 @@ public class Main {
         ArrayList<Branch> openSet = new ArrayList<>();
 
         while(currentBranch.front[0] != goal[0] || currentBranch.front[1] != goal[1]){
-            currentBranch = AStarUtils.recheckBranches(openSet, currentBranch, goal, grid);
-
             Branch bestPath = AStarUtils.evaluateNeighboursOpenSet(goal, grid, currentBranch, closedSet, openSet);
 
             currentBranch = bestPath;

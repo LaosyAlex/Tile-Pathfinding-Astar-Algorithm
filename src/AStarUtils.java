@@ -71,13 +71,17 @@ public class AStarUtils {
         */
         int[] p = path.front;
         closedSet.add(p);
-        path.path.add(p);
+        ArrayList<int[]> newPath = new ArrayList<>(path.path);
+        newPath.add(p);
 
         ArrayList<int[]> neighbours = getNeighbours(grid, p);
 
         ArrayList<Branch> tempBranches = new ArrayList<>();
         for (int i = 0; i < neighbours.size(); i++){
-            Branch tempBranch = new Branch(neighbours.get(i), path.path, path.cost + evaluateSymbol(grid[neighbours.get(i)[1]][neighbours.get(i)[0]]));
+            if (GridUtils.isIntArrinArrList(closedSet, neighbours.get(i)) == true){
+                continue;
+            }
+            Branch tempBranch = new Branch(neighbours.get(i), newPath, path.cost + evaluateSymbol(grid[neighbours.get(i)[1]][neighbours.get(i)[0]]));
 
             tempBranches.add(tempBranch);
         }
